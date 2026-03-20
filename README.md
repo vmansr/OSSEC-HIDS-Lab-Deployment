@@ -19,3 +19,6 @@ Durante la compilación, se resolvieron manualmente las siguientes dependencias 
 
 ## 🛡️ Pruebas de Seguridad
 Se realizó un ataque de fuerza bruta simulado (`su - root`), logrando una detección exitosa en el Manager con una regla de **Nivel 5**.
+
+
+"La implementación de este laboratorio no solo demuestra la capacidad de desplegar herramientas Open Source de seguridad, sino que sienta las bases para el estudio de la seguridad proactiva. El dominio de OSSEC permite transitar desde la simple gestión de logs hacia el monitoreo de integridad y la respuesta automatizada ante incidentes, competencias críticas en la protección de activos digitales modernos."
