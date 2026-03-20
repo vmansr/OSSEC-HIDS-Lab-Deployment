@@ -1,1 +1,55 @@
+=====================================================================
+LABORATORIO DE DESPLIEGUE OSSEC HIDS - GUÍA DE COMANDOS
+=====================================================================
+Autor: Victor Manuel
+Rol: Estudiante de Ingeniería de Computación / Especialista Legal
+Fecha: Marzo 2026
+---------------------------------------------------------------------
 
+1. PREPARACIÓN DEL ENTORNO (Ambas máquinas)
+-------------------------------------------
+Actualizar el sistema e instalar herramientas base:
+$ sudo apt update && sudo apt upgrade -y
+$ sudo apt install build-essential gcc make wget tar -y
+
+2. INSTALACIÓN DE DEPENDENCIAS CRÍTICAS
+---------------------------------------
+Comando unificado para resolver errores de compilación (PCRE2, OpenSSL, Systemd):
+$ sudo apt install libpcre2-dev zlib1g-dev libssl-dev libsystemd-dev -y
+
+3. DESCARGA Y COMPILACIÓN DE OSSEC 3.7.0
+----------------------------------------
+$ wget https://github.com/ossec/ossec-hids/archive/3.7.0.tar.gz
+$ tar -zxvf 3.7.0.tar.gz
+$ cd ossec-hids-3.7.0
+$ sudo ./install.sh
+
+* Nota Manager: Elegir tipo "server"
+* Nota Víctima: Elegir tipo "agent"
+
+4. CONFIGURACIÓN DEL "APRETÓN DE MANOS" (HANDSHAKE)
+---------------------------------------------------
+En el MANAGER (Servidor):
+$ sudo /var/ossec/bin/manage_agents
+(Usar opción 'A' para añadir agente y 'E' para extraer la clave 001)
+
+En la VÍCTIMA (Agente):
+$ sudo /var/ossec/bin/manage_agents
+(Usar opción 'I' para importar la clave copiada del servidor)
+
+5. GESTIÓN DEL SERVICIO
+-----------------------
+Reiniciar Manager:
+$ sudo /var/ossec/bin/ossec-control restart
+
+Iniciar Agente:
+$ sudo /var/ossec/bin/ossec-control start
+
+6. PRUEBA DE ATAQUE Y MONITOREO (SOC MODE)
+------------------------------------------
+Ver alertas en tiempo real en el Manager:
+$ sudo tail -f /var/ossec/logs/alerts/alerts.log
+
+Simular ataque en la Víctima:
+$ su - root (fallar contraseña 5 veces)
+=====================================================================
